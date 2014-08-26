@@ -11,7 +11,7 @@ var input;
 try {
     input = fs.readFileSync(ops.input).toString();
 } catch(e) {
-    console.error("Could not read input file.");
+    console.error("Could not read input file ("+ops.input+").");
     process.exit(1);
 }
 
@@ -29,6 +29,6 @@ try {
     fs.writeFileSync(ops.output, final);
     console.log("File "+ops.output+" written.")
 } catch(e) {
-    console.error("Could not write output file.");
+    console.error("Could not write output file ("+ops.output+").");
     process.exit(1);
 }

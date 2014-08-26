@@ -12,7 +12,7 @@ try {
     input = fs.readFileSync(ops.input).toString();
 } catch(e) {
     console.error("Could not read input file.");
-    process.exit();
+    process.exit(1);
 }
 
 var contentWithoutHtml = input.replace(/<\/?[a-z]+>/gi,"").replace("<meta charset=\"UTF-8\" />","");
@@ -30,4 +30,5 @@ try {
     console.log("File "+ops.output+" written.")
 } catch(e) {
     console.error("Could not write output file.");
+    process.exit(1);
 }

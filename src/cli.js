@@ -14,7 +14,9 @@ program
     .option('-p, --package [file]', 'Take information from a package.json file')
     .parse(process.argv);
 
-exporter(program).catch(function (e) {
+exporter(program).then(function () {
+    console.log(require('path').resolve(program.output) + ' written');
+}, function (e) {
     console.error(e.message);
     process.exit(1);
 });

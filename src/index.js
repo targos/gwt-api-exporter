@@ -16,7 +16,7 @@ module.exports = function (options) {
             return reject(new Error('Exports option is mandatory'));
         }
         fs.readFile(options.input, 'utf-8', function (err, input) {
-            if (err) return reject(new Error('Could not read input file'));
+            if (err) return reject(new Error('Could not read input file ('+ err.code + ' ' + err.path +')'));
             var idx = input.indexOf('onScriptDownloaded');
             if (idx >= 0) {
                 // Obfuscated file
@@ -27,7 +27,7 @@ module.exports = function (options) {
             }
             var endStartIdx = input.indexOf('$wnd.__gwtStatsSessionId : null;');
             if (endStartIdx === -1) {
-                return reject(new Error('nvalid GWT file. Only xsiframe linker is supported.'));
+                return reject(new Error('Invalid GWT file. Only xsiframe linker is supported.'));
             }
             // Remove useless stuff
             input = input.substring(endStartIdx + 32);
@@ -41,7 +41,7 @@ module.exports = function (options) {
             if (options.package) {
                 if (typeof options.package === 'string') {
                     fs.readFile(options.package, 'utf-8', function (err, pkgStr) {
-                        if (err) return reject(new Error('Could not read package file'));
+                        if (err) return reject(new Error('Could not read package file ('+ err.code + ' ' + err.path +')'));
                         var pkg;
                         try {
                             pkg = JSON.parse(pkgStr);
@@ -83,7 +83,7 @@ module.exports = function (options) {
                 final = commentStr.join('\n') + final;
                 if (options.output) {
                     fs.writeFile(options.output, final, function (err) {
-                        if (err) return reject(new Error('Could not write output file'));
+                        if (err) return reject(new Error('Could not write output file ('+ err.code + ' ' + err.path +')'));
                         resolve(true);
                     });
                 } else {

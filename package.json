@@ -1,7 +1,7 @@
 {
   "name": "gwt-api-exporter",
   "version": "1.0.0",
-  "description": "Export a java API converted with GWT",
+  "description": "Export a javascript API from GWT",
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,6 +1,6 @@
 # gwt-api-exporter
 
-Export a java API converted with GWT
+Export a javascript API from GWT
 
 ## Installation
 

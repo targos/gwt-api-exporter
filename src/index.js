@@ -9,8 +9,11 @@ module.exports = function (options) {
         if (options === null || typeof options !== 'object') {
             options = {};
         }
-        if (!options.input || !options.exports) {
-            return reject(new Error('Input and exports options are mandatory'));
+        if (!options.input) {
+            return reject(new Error('Input option is mandatory'));
+        }
+        if (!options.exports) {
+            return reject(new Error('Exports option is mandatory'));
         }
         fs.readFile(options.input, 'utf-8', function (err, input) {
             if (err) return reject(new Error('Could not read input file'));
@@ -24,7 +27,7 @@ module.exports = function (options) {
             }
             var endStartIdx = input.indexOf('$wnd.__gwtStatsSessionId : null;');
             if (endStartIdx === -1) {
-                return reject(new Error('Invalid GWT file. Only xsiframe linker is supported.'));
+                return reject(new Error('nvalid GWT file. Only xsiframe linker is supported.'));
             }
             // Remove useless stuff
             input = input.substring(endStartIdx + 32);

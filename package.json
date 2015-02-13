@@ -3,14 +3,25 @@
   "version": "1.0.0",
   "description": "Export a javascript API from GWT",
   "main": "./src/index.js",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive"
   },
   "bin": "./src/cli.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/targos/gwt-api-exporter.git"
   },
+  "keywords": [
+    "gwt",
+    "exporter",
+    "google",
+    "web",
+    "toolkit"
+  ],
   "author": "Michaël Zasso",
   "license": "MIT",
   "bugs": {
@@ -20,5 +31,10 @@
   "dependencies": {
     "commander": "^2.6.0",
     "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "mocha-better-spec-reporter": "latest",
+    "mocha": "latest",
+    "should": "latest"
   }
 }

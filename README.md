@@ -1,5 +1,10 @@
 # gwt-api-exporter
 
+  [![NPM version][npm-image]][npm-url]
+  [![build status][travis-image]][travis-url]
+  [![David deps][david-image]][david-url]
+  [![npm download][download-image]][download-url]
+
 Export a javascript API from GWT
 
 ## Installation
@@ -44,3 +49,16 @@ exporter({
  * -o, --output:   Path for the output file (default: lib.js)
  * -e, --exports:  Exported namespace of the API (without $wnd)
  * -p, --package:  Path to a package.json file (default: null). If a valid file is provided, the generated lib will contain a header with some metadata like the name, description, version number...
+
+## License
+
+  [MIT](./LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/gwt-api-exporter.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/gwt-api-exporter
+[travis-image]: https://img.shields.io/travis/targos/gwt-api-exporter/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/targos/gwt-api-exporter
+[david-image]: https://img.shields.io/david/targos/gwt-api-exporter.svg?style=flat-square
+[david-url]: https://david-dm.org/targos/gwt-api-exporter
+[download-image]: https://img.shields.io/npm/dm/gwt-api-exporter.svg?style=flat-square
+[download-url]: https://npmjs.org/package/gwt-api-exporter

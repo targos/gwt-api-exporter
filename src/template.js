@@ -1,28 +1,30 @@
-function getExports($wnd) {
+(function () {
+    'use strict';
 
-    var $doc = $wnd.document;
-    var $gwt = {};
-    var navigator = {
-        userAgent: 'webkit'
-    };
+    function getExports($wnd) {
 
-    function noop(){}
+        var $doc = $wnd.document;
+        var $gwt = {};
+        var navigator = {
+            userAgent: 'webkit'
+        };
 
-    var __gwtModuleFunction = noop;
-    __gwtModuleFunction.__moduleStartupDone = noop;
-    var $sendStats = noop;
+        function noop(){}
 
-    // Start GWT code <%= gwtContent %>
-    // End GWT code
+        var __gwtModuleFunction = noop;
+        __gwtModuleFunction.__moduleStartupDone = noop;
+        var $sendStats = noop;
+        var $moduleName, $moduleBase;
 
-    var toReturn = $wnd<%= exportsName %>;
+        // Start GWT code <%= gwtContent %>
+        // End GWT code
 
-    toReturn.version = '<%= version %>';
+        var toReturn = $wnd<%= exportsName %>;
 
-    return toReturn;
-}
+        toReturn.version = '<%= version %>';
 
-(function loadFromGWT() {
+        return toReturn;
+    }
 
     var fakeWindow = {};
 

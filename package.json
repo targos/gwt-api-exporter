@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive"
+    "test": "mocha --require should --reporter mocha-better-spec-reporter"
   },
   "bin": "./src/cli.js",
   "repository": {

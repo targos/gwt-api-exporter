@@ -32,15 +32,20 @@
         var timers = require('timers');
         fakeWindow.setTimeout = timers.setTimeout;
         fakeWindow.clearTimeout = timers.clearTimeout;
+        fakeWindow.setInterval = timers.setInterval;
+        fakeWindow.clearInterval = timers.clearInterval;
         fakeWindow.document = {};
         module.exports = getExports(fakeWindow);
     } else { // Browser
-        fakeWindow.setTimeout = function () {
-            return window.setTimeout.apply(window, arguments);
-        };
-        fakeWindow.clearTimeout = function () {
-            return window.clearTimeout.apply(window, arguments);
-        };
+        // Timer proxies
+        fakeWindow.setTimeout = window.setTimeout.bind(window);
+        fakeWindow.clearTimeout = window.clearTimeout.bind(window);
+        fakeWindow.setInterval = window.setInterval.bind(window);
+        fakeWindow.clearInterval = window.clearInterval.bind(window);
+        // Other methods that can be used by GWT
+        fakeWindow.addEventListener = window.addEventListener.bind(window);
+        fakeWindow.getComputedStyle = window.getComputedStyle.bind(window);
+
         fakeWindow.document = window.document;
         if (typeof define === 'function' && define.amd) { // AMD
             define(function () {

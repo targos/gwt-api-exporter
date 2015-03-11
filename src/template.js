@@ -37,24 +37,25 @@
         fakeWindow.document = {};
         module.exports = getExports(fakeWindow);
     } else { // Browser
-        // Timer proxies
-        fakeWindow.setTimeout = window.setTimeout.bind(window);
-        fakeWindow.clearTimeout = window.clearTimeout.bind(window);
-        fakeWindow.setInterval = window.setInterval.bind(window);
-        fakeWindow.clearInterval = window.clearInterval.bind(window);
-        // Other methods that can be used by GWT
-        fakeWindow.addEventListener = window.addEventListener.bind(window);
-        fakeWindow.getComputedStyle = window.getComputedStyle.bind(window);
+        if (<%= useFake %>) {
+            // Timer proxies
+            fakeWindow.setTimeout = window.setTimeout.bind(window);
+            fakeWindow.clearTimeout = window.clearTimeout.bind(window);
+            fakeWindow.setInterval = window.setInterval.bind(window);
+            fakeWindow.clearInterval = window.clearInterval.bind(window);
+            fakeWindow.document = window.document;
+        } else {
+            fakeWindow = window;
+        }
 
-        fakeWindow.document = window.document;
         if (typeof define === 'function' && define.amd) { // AMD
             define(function () {
                 return getExports(fakeWindow);
             });
         } else { // Global
-            var path = <%= exportsPath %>,
-                l = path.length - 1,
-                obj = window;
+            var path = <%= exportsPath %>;
+            var l = path.length - 1;
+            var obj = window;
             for (var i = 0; i < l; i++) {
                 obj = obj[path[i]] || (obj[path[i]] = {});
             }

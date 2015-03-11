@@ -61,11 +61,15 @@ module.exports = function (options) {
                 parseTemplate({});
             }
             function parseTemplate(pkg) {
+                if (typeof options.fake !== 'boolean') {
+                    options.fake = true; // if option is not set, we use fake window
+                }
                 var final = template({
                     gwtContent: '\n' + input,
                     exportsName: exportsStr,
                     exportsPath: exportsName,
-                    version: pkg.version || ''
+                    version: pkg.version || '',
+                    useFake: options.fake
                 });
                 var commentStr = ['/**'];
                 if (pkg.name) {

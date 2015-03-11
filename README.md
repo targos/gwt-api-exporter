@@ -41,7 +41,7 @@ exporter({
 
 ## Usage as a CLI
 
-`gwt-api-exporter -i "xxx.cache.js" -e "my.namespace"`
+`gwt-api-exporter -i xxx.cache.js -e my.namespace`
 
 ### Options
 
@@ -49,6 +49,7 @@ exporter({
  * -o, --output:   Path for the output file (default: lib.js)
  * -e, --exports:  Exported namespace of the API (without $wnd)
  * -p, --package:  Path to a package.json file (default: null). If a valid file is provided, the generated lib will contain a header with some metadata like the name, description, version number...
+ * -f, --no-fake:  Do not use fakeWindow in browser (default: true). This is particularly useful if methods from the main window need to be called (for example $wnd.addEventListener). Care must be taken not to pollute the global object when this option is on.
 
 ## License
 

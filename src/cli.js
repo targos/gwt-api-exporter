@@ -12,6 +12,7 @@ program
     .option('-o, --output [file]', 'Output file', 'lib.js')
     .option('-e, --exports <path>', 'Exported path from GWT')
     .option('-p, --package [file]', 'Take information from a package.json file')
+    .option('-f, --no-fake', 'Do not use fakeWindow in browser')
     .parse(process.argv);
 
 exporter(program).then(function () {

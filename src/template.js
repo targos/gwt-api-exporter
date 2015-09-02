@@ -39,13 +39,13 @@
     } else { // Browser
         if (<%= useFake %>) {
             // Timer proxies
-            fakeWindow.setTimeout = window.setTimeout.bind(window);
-            fakeWindow.clearTimeout = window.clearTimeout.bind(window);
-            fakeWindow.setInterval = window.setInterval.bind(window);
-            fakeWindow.clearInterval = window.clearInterval.bind(window);
-            fakeWindow.document = window.document;
+            fakeWindow.setTimeout = self.setTimeout.bind(self);
+            fakeWindow.clearTimeout = self.clearTimeout.bind(self);
+            fakeWindow.setInterval = self.setInterval.bind(self);
+            fakeWindow.clearInterval = self.clearInterval.bind(self);
+            fakeWindow.document = self.document;
         } else {
-            fakeWindow = window;
+            fakeWindow = self;
         }
 
         if (typeof define === 'function' && define.amd) { // AMD
@@ -55,7 +55,7 @@
         } else { // Global
             var path = <%= exportsPath %>;
             var l = path.length - 1;
-            var obj = window;
+            var obj = self;
             for (var i = 0; i < l; i++) {
                 obj = obj[path[i]] || (obj[path[i]] = {});
             }

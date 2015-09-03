@@ -26,41 +26,49 @@
         return toReturn;
     }
 
-    var fakeWindow = {};
+    var isBrowser, globalEnv;
+
+    if (typeof window !== 'undefined') { // usual browser window
+        isBrowser = true;
+        globalEnv = window;
+    } else if (typeof self !== 'undefined') { // Web Worker
+        isBrowser = true;
+        globalEnv = self;
+    } else { // Node.js
+        isBrowser = false;
+        globalEnv = global;
+    }
+
+    var fakeWindow;
+    if (isBrowser && !<%= useFake %>) {
+        fakeWindow = globalEnv;
+    } else {
+        fakeWindow = {};
+        fakeWindow.setTimeout = globalEnv.setTimeout.bind(globalEnv);
+        fakeWindow.clearTimeout = globalEnv.clearTimeout.bind(globalEnv);
+        fakeWindow.setInterval = globalEnv.setInterval.bind(globalEnv);
+        fakeWindow.clearInterval = globalEnv.clearInterval.bind(globalEnv);
+        if (isBrowser) {
+            fakeWindow.document = globalEnv.document
+        } else {
+            fakeWindow.document = {};
+        }
+    }
 
     if (typeof module !== 'undefined' && module.exports) { // NodeJS
-        var timers = require('timers');
-        fakeWindow.setTimeout = timers.setTimeout;
-        fakeWindow.clearTimeout = timers.clearTimeout;
-        fakeWindow.setInterval = timers.setInterval;
-        fakeWindow.clearInterval = timers.clearInterval;
-        fakeWindow.document = {};
         module.exports = getExports(fakeWindow);
-    } else { // Browser
-        if (<%= useFake %>) {
-            // Timer proxies
-            fakeWindow.setTimeout = self.setTimeout.bind(self);
-            fakeWindow.clearTimeout = self.clearTimeout.bind(self);
-            fakeWindow.setInterval = self.setInterval.bind(self);
-            fakeWindow.clearInterval = self.clearInterval.bind(self);
-            fakeWindow.document = self.document;
-        } else {
-            fakeWindow = self;
+    } else if (typeof define === 'function' && define.amd) { // AMD
+        define(function () {
+            return getExports(fakeWindow);
+        });
+    } else { // Global
+        var path = <%= exportsPath %>;
+        var l = path.length - 1;
+        var obj = globalEnv;
+        for (var i = 0; i < l; i++) {
+            obj = obj[path[i]] || (obj[path[i]] = {});
         }
-
-        if (typeof define === 'function' && define.amd) { // AMD
-            define(function () {
-                return getExports(fakeWindow);
-            });
-        } else { // Global
-            var path = <%= exportsPath %>;
-            var l = path.length - 1;
-            var obj = self;
-            for (var i = 0; i < l; i++) {
-                obj = obj[path[i]] || (obj[path[i]] = {});
-            }
-            obj[path[l]] = getExports(fakeWindow);
-        }
+        obj[path[l]] = getExports(fakeWindow);
     }
 
 })();

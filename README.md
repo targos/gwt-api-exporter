@@ -13,13 +13,13 @@ Export a javascript API from GWT
 
 If you want to use the CLI, install globally:
 
-`sudo npm install -g gwt-api-exporter`
+`npm install -g gwt-api-exporter`
 
 ## Usage as a module
 
-Only one method is exported and returns a promise.
+Only one method is exported and returns a Promise.
 If no output option is provided, the promise will resolve with the generated code. Otherwise it will write the output
-file and resolve with true.
+file and resolve with `true`.
 
 ```js
 var exporter = require('gwt-api-exporter');

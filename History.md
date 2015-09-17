@@ -1,3 +1,13 @@
+1.1.3 / 2015-09-03
+==================
+
+* fix document object in web workers
+
+1.1.2 / 2015-09-03
+==================
+
+* fix export template for webpack compatibility
+
 1.1.1 / 2015-09-02
 ==================
 

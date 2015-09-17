@@ -36,5 +36,6 @@
     "mocha-better-spec-reporter": "latest",
     "mocha": "latest",
     "should": "latest"
-  }
+  },
+  "engines": { "node": ">= 0.11" }
 }

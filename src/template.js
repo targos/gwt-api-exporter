@@ -50,7 +50,9 @@
         fakeWindow.clearInterval = globalEnv.clearInterval.bind(globalEnv);
     }
 
-    fakeWindow.document = isBrowser ? (globalEnv.document || {}) : {};
+    if (!isBrowser || !globalEnv.document) { // add document object for Node.js and Workers
+        fakeWindow.document = {};
+    }
 
     if (typeof module !== 'undefined' && module.exports) { // NodeJS
         module.exports = getExports(fakeWindow);

@@ -1,6 +1,6 @@
 {
   "name": "gwt-api-exporter",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Export a javascript API from GWT",
   "main": "./src/index.js",
   "directories": {

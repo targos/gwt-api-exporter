@@ -65,7 +65,6 @@ function compileTemplate(contents, options) {
             version: _.get(pkgInfo, 'version', ''),
             useFake: options.fake,
             gwtContent: `\n${contents}`,
-            exportsName: getExportsName(options.exports),
             exportsPath: getExportsPath(options.exports)
         })
     }
@@ -102,10 +101,6 @@ function getPackageInfo(options) {
     }
     if (_.isObject(pkg)) return Promise.resolve(pkg);
     return Promise.resolve({});
-}
-
-function getExportsName(exports) {
-    return JSON.stringify(exports.split('.').map(String));
 }
 
 function getExportsPath(exports) {

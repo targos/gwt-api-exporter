@@ -18,7 +18,7 @@
         // Start GWT code <%= gwtContent %>
         // End GWT code
 
-        var toReturn = $wnd<%= exportsName %>;
+        var toReturn = $wnd<%= exportsPath %>;
 
         toReturn.version = '<%= version %>';
 

@@ -72,16 +72,20 @@ function compileTemplate(contents, options) {
 
     function buildComments(pkgInfo) {
         const comments = [];
-        comments.push('/**');
-        if (pkgInfo['name']) {
-            const content = _.compact([pkgInfo['name'], pkgInfo['description']]).join(' - ');
-            comments.push(` * ${content}`);
-        }
-        if (pkgInfo['version']) comments.push(` * @version v${pkgInfo['version']}`);
-        comments.push(` * @date ${(new Date()).toISOString()}`);
-        if (pkgInfo['homepage']) comments.push(` * @link ${pkgInfo['homepage']}`);
-        if (pkgInfo['license']) comments.push(` * @license ${pkgInfo['license']}`);
-        comments.push(' */');
+        const push = (content, condition) => {
+            if (_.isUndefined(condition) || condition) {
+                comments.push(content);
+            }
+        };
+
+        push('/**');
+        push(` * ${_.compact([pkgInfo['name'], pkgInfo['description']]).join(' - ')}`, pkgInfo['name']);
+        push(` * @version v${pkgInfo['version']}`, pkgInfo['version']);
+        push(` * @date ${(new Date()).toISOString()}`);
+        push(` * @link ${pkgInfo['homepage']}`, pkgInfo['homepage']);
+        push(` * @license ${pkgInfo['license']}`, pkgInfo['license']);
+        push(' */');
+
         return comments.join('\n');
     }
 }

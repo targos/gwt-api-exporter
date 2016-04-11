@@ -1,23 +1,23 @@
 #!/usr/bin/env node
-
 'use strict';
+const program = require('commander');
 
-var exporter = require('./index');
-var program = require('commander');
-var pkgInfo = require('../package.json');
-
+//noinspection JSCheckFunctionSignatures
 program
-    .version(pkgInfo.version)
+    .version(require('../package.json').version)
     .option('-i, --input <file>', 'Input file')
     .option('-o, --output [file]', 'Output file', 'lib.js')
     .option('-e, --exports <path>', 'Exported path from GWT')
     .option('-p, --package [file]', 'Take information from a package.json file')
+    .option('-t, --template [file]', 'Take information from a package.json file')
     .option('-f, --no-fake', 'Do not use fakeWindow in browser')
     .parse(process.argv);
 
-exporter(program).then(function () {
-    console.log(require('path').resolve(program.output) + ' written');
-}, function (e) {
-    console.error(e.message);
-    process.exit(1);
-});
+require('./index')(program)
+    .then(() => {
+        console.log(`${require('path').resolve(program['output'])} written`);
+    })
+    .catch(err => {
+        console.error(err.message);
+        process.exit(1);
+    });

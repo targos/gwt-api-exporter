@@ -2,7 +2,6 @@
     'use strict';
 
     function getExports($wnd) {
-
         var $doc = $wnd.document;
         var $gwt = {};
         var navigator = {
@@ -69,5 +68,4 @@
         }
         obj[path[l]] = getExports(fakeWindow);
     }
-
 })();

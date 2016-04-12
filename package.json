@@ -39,6 +39,6 @@
     "should": "latest"
   },
   "engines": {
-    "node": ">= 5.0"
+    "node": ">= 4.0"
   }
 }

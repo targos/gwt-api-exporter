@@ -2,7 +2,6 @@
     'use strict';
 
     function getExports($wnd) {
-
         var $doc = $wnd.document;
         var $gwt = {};
         var navigator = {
@@ -19,7 +18,7 @@
         // Start GWT code <%= gwtContent %>
         // End GWT code
 
-        var toReturn = $wnd<%= exportsName %>;
+        var toReturn = $wnd<%= exportsPath %>;
 
         toReturn.version = '<%= version %>';
 
@@ -69,5 +68,4 @@
         }
         obj[path[l]] = getExports(fakeWindow);
     }
-
 })();

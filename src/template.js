@@ -26,17 +26,20 @@
         return toReturn;
     }
 
-    var isBrowser, globalEnv;
+    var isBrowser, globalEnv, document;
 
     if (typeof window !== 'undefined') { // usual browser window
         isBrowser = true;
         globalEnv = window;
+        document = window.document;
     } else if (typeof self !== 'undefined') { // Web Worker
         isBrowser = true;
         globalEnv = self;
+        document = {};
     } else { // Node.js
         isBrowser = false;
         globalEnv = global;
+        document = {};
     }
 
     var fakeWindow;
@@ -51,7 +54,7 @@
     }
 
     if (!fakeWindow.document) {
-        fakeWindow.document = {};
+        fakeWindow.document = document;
     }
 
     if (typeof module !== 'undefined' && module.exports) { // NodeJS

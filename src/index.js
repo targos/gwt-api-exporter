@@ -31,6 +31,8 @@ module.exports = function (options) {
             }
             // Remove useless stuff
             input = input.substring(endStartIdx + 32);
+            // Remove sourceURL
+            input = input.replace(/\/\/# sourceURL=[^.]+\.js/, '');
             var exportsNames = options.exports.split('.');
             var exportsStr = exportsNames.map(function (name) {
                 return '["' + name + '"]';

@@ -51,7 +51,11 @@
         fakeWindow.clearTimeout = globalEnv.clearTimeout.bind(globalEnv);
         fakeWindow.setInterval = globalEnv.setInterval.bind(globalEnv);
         fakeWindow.clearInterval = globalEnv.clearInterval.bind(globalEnv);
-        fakeWindow.Error = globalEnv.Error; // required since GWT 2.8.0
+        // required since GWT 2.8.0
+        fakeWindow.Error = globalEnv.Error;
+        fakeWindow.Math = globalEnv.Math;
+        fakeWindow.RegExp = globalEnv.RegExp;
+        fakeWindow.TypeError = globalEnv.TypeError;
     }
 
     if (!fakeWindow.document) {

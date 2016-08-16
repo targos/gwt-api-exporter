@@ -33,9 +33,9 @@
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "mocha": "^2.4.5",
+    "mocha": "^3.0.2",
     "mocha-better-spec-reporter": "^3.0.2",
-    "should": "^8.3.1"
+    "should": "^11.1.0"
   },
   "engines": {
     "node": ">= 0.11"

@@ -1,4 +1,4 @@
-(function () {
+(function (root) {
     'use strict';
 
     function getExports($wnd) {
@@ -36,9 +36,13 @@
         isBrowser = true;
         globalEnv = self;
         document = {};
-    } else { // Node.js
+    } else if (typeof global !== 'undefined') { // Node.js
         isBrowser = false;
         globalEnv = global;
+        document = {};
+    } else { // Other environment (example: CouchDB)
+        isBrowser = false;
+        globalEnv = root;
         document = {};
     }
 
@@ -47,10 +51,10 @@
         fakeWindow = globalEnv;
     } else {
         fakeWindow = {};
-        fakeWindow.setTimeout = globalEnv.setTimeout.bind(globalEnv);
-        fakeWindow.clearTimeout = globalEnv.clearTimeout.bind(globalEnv);
-        fakeWindow.setInterval = globalEnv.setInterval.bind(globalEnv);
-        fakeWindow.clearInterval = globalEnv.clearInterval.bind(globalEnv);
+        fakeWindow.setTimeout = globalEnv.setTimeout ? globalEnv.setTimeout.bind(globalEnv) : noop;
+        fakeWindow.clearTimeout = globalEnv.clearTimeout ? globalEnv.clearTimeout.bind(globalEnv) : noop;
+        fakeWindow.setInterval = globalEnv.setInterval ? globalEnv.setInterval.bind(globalEnv) : noop;
+        fakeWindow.clearInterval = globalEnv.clearInterval ? globalEnv.clearInterval.bind(globalEnv) : noop;
         // required since GWT 2.8.0
         fakeWindow.Error = globalEnv.Error;
         fakeWindow.Math = globalEnv.Math;
@@ -62,11 +66,15 @@
         fakeWindow.document = document;
     }
 
-    if (typeof module !== 'undefined' && module.exports) { // NodeJS
-        module.exports = getExports(fakeWindow);
+    var exportedApi = getExports(fakeWindow);
+
+    if (typeof exports !== 'undefined') { // NodeJS
+        fillExports(exportedApi, exports);
     } else if (typeof define === 'function' && define.amd) { // AMD
         define(function () {
-            return getExports(fakeWindow);
+            var exportsObj = {};
+            fillExports(exportedApi, exportsObj);
+            return exportsObj;
         });
     } else { // Global
         var path = <%= exportsPath %>;
@@ -75,7 +83,17 @@
         for (var i = 0; i < l; i++) {
             obj = obj[path[i]] || (obj[path[i]] = {});
         }
-        obj[path[l]] = getExports(fakeWindow);
+        obj[path[l]] = {};
+        fillExports(exportedApi, obj[path[l]]);
     }
 
-})();
+    function fillExports(obj, exports) {
+        var keys = Object.keys(obj);
+        for (var i = 0; i < keys.length; i++) {
+            exports[keys[i]] = obj[keys[i]];
+        }
+    }
+
+    function noop() {}
+
+})(this);

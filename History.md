@@ -1,3 +1,8 @@
+1.2.0 / 2016-09-01
+==================
+
+* feat: add support for other CommonJS environments such as CouchDB
+
 1.1.10 / 2016-08-16
 ===================
 

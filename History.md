@@ -1,3 +1,8 @@
+1.2.1 / 2016-01-09
+==================
+
+* fix: normalize detection of Window and Worker environments
+
 1.2.0 / 2016-09-01
 ==================
 

@@ -67,6 +67,8 @@
 
   var exportedApi = getExports(fakeWindow);
 
+  var extendApi = <%= extendApi %>;
+
   if (typeof exports !== 'undefined') { // NodeJS
     fillExports(exportedApi, exports);
   } else if (typeof define === 'function' && define.amd) { // AMD
@@ -91,6 +93,7 @@
     for (var i = 0; i < keys.length; i++) {
       exports[keys[i]] = obj[keys[i]];
     }
+    extendApi(exports);
   }
 
   function noop() {}

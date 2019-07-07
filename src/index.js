@@ -97,7 +97,8 @@ module.exports = function(options) {
           exportsName: exportsStr,
           exportsPath: exportsName,
           version: pkg.version || '',
-          useFake: options.fake
+          useFake: options.fake,
+          extendApi: options.extendApi || 'function emptyExtender() {}'
         });
         var commentStr = ['/**'];
         if (pkg.name) {

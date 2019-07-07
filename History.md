@@ -1,3 +1,22 @@
+# [2.0.0](https://github.com/targos/gwt-api-exporter/compare/v1.2.1...v2.0.0) (2019-07-07)
+
+
+### chore
+
+* remove support for Node.js 4 and 6 ([8b6aad2](https://github.com/targos/gwt-api-exporter/commit/8b6aad2))
+
+
+### Features
+
+* add an option to extend the API before it is exported. ([795980a](https://github.com/targos/gwt-api-exporter/commit/795980a))
+
+
+### BREAKING CHANGES
+
+* Node.js 4 and 6 are no longer supported.
+
+
+
 1.2.1 / 2016-01-09
 ==================
 

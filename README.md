@@ -1,10 +1,9 @@
 # gwt-api-exporter
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
 [![npm download][download-image]][download-url]
 
-Export a javascript API from GWT
+Export a JavaScript API from a GWT bundle.
 
 ## Installation
 
@@ -25,12 +24,12 @@ You will need to provide as input the file named `XYZ.cache.js` (name starting w
 To export the JS bindings, you need to use the JSInterop features available from GWT version 2.7.  
 Export all your names in the same object of `$wnd` and use the `exports` option to specify the name you chose.  
 Example: for the `@JsNamespace("$wnd.example")` annotation, exports would be `example`.  
-An simple example project made with Eclipse is available here: https://github.com/targos/gwt-js-example
+A simple example project made with Eclipse is available here: https://github.com/targos/gwt-js-example
 
 ## Usage as a module
 
 Only one method is exported and returns a Promise.
-If no output option is provided, the promise will resolve with the generated code. Otherwise it will write the output
+If no output option is provided, the promise will resolve with the generated code. Otherwise, it will write the output
 file and resolve with `true`.
 
 ```js
@@ -44,7 +43,6 @@ exporter({
     description: 'my awesome library',
     version: '1.0.0'
   },
-  extendApi: 'function(exports) { export.extended = true }'
 }).catch(function(e) {
   console.error(e);
 });
@@ -70,7 +68,5 @@ exporter({
 
 [npm-image]: https://img.shields.io/npm/v/gwt-api-exporter.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/gwt-api-exporter
-[travis-image]: https://img.shields.io/travis/targos/gwt-api-exporter/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/targos/gwt-api-exporter
 [download-image]: https://img.shields.io/npm/dm/gwt-api-exporter.svg?style=flat-square
 [download-url]: https://npmjs.org/package/gwt-api-exporter

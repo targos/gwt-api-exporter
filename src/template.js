@@ -37,6 +37,7 @@ if (isBrowserWindow && !<%= useFake %>) {
   gwtWindow.setInterval = globalThis.setInterval ? globalThis.setInterval.bind(globalThis) : noop;
   gwtWindow.clearInterval = globalThis.clearInterval ? globalThis.clearInterval.bind(globalThis) : noop;
   gwtWindow.Error = globalThis.Error;
+  gwtWindow.Map = globalThis.Map;
   gwtWindow.Math = globalThis.Math;
   gwtWindow.RegExp = globalThis.RegExp;
   gwtWindow.TypeError = globalThis.TypeError;
